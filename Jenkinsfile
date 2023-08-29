@@ -28,7 +28,7 @@ pipeline{
         
         stage('DockerHub Push'){
             steps{
-                withCredentials([string(credentialsId: 'docker_hub', variable: 'dockerHubPwd')]) {
+                withCredentials([string(credentialsId: 'docker_hub1', variable: 'dockerHubPwd')]) {
                     sh "docker login -u thoshinny -p ${dockerHubPwd}"
                 }
                 
