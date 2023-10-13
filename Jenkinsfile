@@ -15,7 +15,6 @@ pipeline{
         }
         stage ('Check-Git-Secrets') {
       steps {
-        sh 'service docker start'
         sh 'rm trufflehog || true'
         //sh 'docker pull gesellix/trufflehog'
         sh 'docker run gesellix/trufflehog --json https://github.com/Thoshinny-cyber/dockeransiblejenkins.git > trufflehog'
