@@ -13,6 +13,15 @@ pipeline{
                     url: 'https://github.com/Thoshinny-cyber/dockeransiblejenkins.git'
             }
         }
+        stage ('Check-Git-Secrets') {
+      steps {
+        sh 'service docker start'
+        sh 'rm trufflehog || true'
+        //sh 'docker pull gesellix/trufflehog'
+        sh 'docker run gesellix/trufflehog --json https://github.com/Thoshinny-cyber/dockeransiblejenkins.git > trufflehog'
+        sh 'cat trufflehog'
+      }
+    }
         
         stage('Maven Build'){
             steps{
