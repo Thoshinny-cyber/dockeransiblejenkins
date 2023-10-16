@@ -5,6 +5,7 @@ pipeline{
     }
     environment {
       DOCKER_TAG = getVersion()
+      SNYK_API= credentials('Snyk')
     }
     stages{
         stage('SCM'){
@@ -31,7 +32,16 @@ pipeline{
         
     //   }
     // }
-        
+        stage('SAST') {
+      steps {
+        echo 'Testing...'
+        snykSecurity(
+          snykInstallation: 'Snyk',
+          snykTokenId: "${SNYK_API}"
+          // place other parameters here
+        )
+      }
+    }        
         stage('Maven Build'){
             steps{
                 sh "mvn clean package"
