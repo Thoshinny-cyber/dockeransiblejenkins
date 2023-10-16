@@ -5,7 +5,7 @@ pipeline{
     }
     environment {
       DOCKER_TAG = getVersion()
-      SNYK_API= credentials('Snyk')
+      SNYK_API= env.SNYK_API_TOKEN
     }
     stages{
         stage('SCM'){
