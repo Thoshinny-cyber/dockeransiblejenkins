@@ -5,7 +5,7 @@ pipeline{
     }
     environment {
       DOCKER_TAG = getVersion()
-      SNYK_API= credentials('Snyk')
+      //SNYK_API= credentials('Snyk')
     }
     stages{
         stage('SCM'){
@@ -37,7 +37,7 @@ pipeline{
         echo 'Testing...'
         snykSecurity(
           snykInstallation: 'Snyk',
-          snykTokenId: "${SNYK_API}"
+          snykTokenId: '58d77bfc-dae4-4c9a-adad-fe3553b93c0f'
           // place other parameters here
         )
       }
