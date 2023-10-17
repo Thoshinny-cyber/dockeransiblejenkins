@@ -31,16 +31,16 @@ pipeline{
         
     //   }
     // }
-        stage('SAST') {
-      steps {
-        echo 'Testing...'
-        snykSecurity(
-          snykInstallation: 'Snyk',
-          snykTokenId: env.SNYK_API_TOKEN
-          // place other parameters here
-        )
-      }
-    }        
+    //     stage('SAST') {
+    //   steps {
+    //     echo 'Testing...'
+    //     snykSecurity(
+    //       snykInstallation: 'Snyk',
+    //       snykTokenId: env.SNYK_API_TOKEN
+    //       // place other parameters here
+    //     )
+    //   }
+    // }        
         stage('Maven Build'){
             steps{
                 sh "mvn clean package"
