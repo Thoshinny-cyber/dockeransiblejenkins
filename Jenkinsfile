@@ -36,7 +36,7 @@ pipeline{
         timeout(time: 10, unit: 'MINUTES') {
         echo 'Testing...'
         snykSecurity(
-          snykInstallation: 'Snyk',
+          snykInstallation: 'snyk',
           snykTokenId: env.SNYK_API_TOKEN,
           // place other parameters here
         )
