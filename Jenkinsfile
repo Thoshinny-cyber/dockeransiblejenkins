@@ -37,7 +37,7 @@ pipeline{
         echo 'Testing...'
         snykSecurity(
           snykInstallation: 'Snyk',
-          snykTokenId: env.SNYK_API_TOKEN
+          snykTokenId: env.SNYK_API_TOKEN,
           allProjects: false
           // place other parameters here
         )
