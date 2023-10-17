@@ -41,12 +41,14 @@ pipeline{
         //   // place other parameters here
         // )
         // }
+          script{
            withCredentials([string(credentialsId: 'Snyk', variable: 'env.SNYK_API_TOKEN')]) {
           docker.image('thoshinny/snyk:latest').inside() {
                         // Run the Snyk scan within the Docker container
                         sh "snyk test"
                     }
            }
+          }
       }
     }        
         stage('Maven Build'){
