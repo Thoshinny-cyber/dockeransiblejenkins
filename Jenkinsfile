@@ -5,6 +5,7 @@ pipeline{
     }
     environment {
       DOCKER_TAG = getVersion()
+      SNYK_API = credentials('Snyk')
     }
     stages{
         stage('SCM'){
@@ -35,22 +36,23 @@ pipeline{
       steps {
         // timeout(time: 10, unit: 'MINUTES') {
         // echo 'Testing...'
-        snykSecurity(
-          failOnError: false, 
-          failOnIssues: false, 
-          snykInstallation: 'Snyk', 
-          snykTokenId: 'Snyk'
-            )
+        // snykSecurity(
+        //   failOnError: false, 
+        //   failOnIssues: false, 
+        //   snykInstallation: 'Snyk', 
+        //   snykTokenId: 'Snyk'
+        //     )
           // place other parameters here
         // )
         // }
-          // script{
-          // // withCredentials([string(credentialsId: 'env.SNYK_API_TOKEN', variable: 'SNYK_API_TOKEN')]) 
-          // docker.image('thoshinny/snyk:latest').inside() {
-          //               // Run the Snyk scan within the Docker container
-          //               sh "snyk test"
-          //           }
-          // // }
+          script{
+          // withCredentials([string(credentialsId: 'env.SNYK_API_TOKEN', variable: 'SNYK_API_TOKEN')]) 
+          docker.image('thoshinny/snyk:latest').inside() {
+                        // Run the Snyk scan within the Docker container
+                        sh "snyk auth ${SNYK_API}"
+                        sh "snyk test"
+                    }
+           }
           // }
       }
     }        
