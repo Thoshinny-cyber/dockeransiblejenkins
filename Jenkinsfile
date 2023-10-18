@@ -5,7 +5,7 @@ pipeline{
     }
     environment {
       DOCKER_TAG = getVersion(),
-      SNYK_API = env.SNYK_API_TOKEN
+      //SNYK_API = env.SNYK_API_TOKEN
     }
     stages{
         stage('SCM'){
@@ -49,7 +49,7 @@ pipeline{
           // withCredentials([string(credentialsId: 'env.SNYK_API_TOKEN', variable: 'SNYK_API_TOKEN')]) 
           docker.image('thoshinny/snyk:latest').inside() {
                         // Run the Snyk scan within the Docker container
-                        sh "snyk auth ${SNYK_API}"
+                        sh "snyk auth ${env.SNYK_API_TOKEN}"
                         sh "snyk test"
                     }
            }
