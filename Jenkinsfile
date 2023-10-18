@@ -4,7 +4,7 @@ pipeline{
       maven 'maven'
     }
     environment {
-      DOCKER_TAG = getVersion(),
+      DOCKER_TAG = getVersion()
       //SNYK_API = env.SNYK_API_TOKEN
     }
     stages{
