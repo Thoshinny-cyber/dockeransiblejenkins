@@ -22,6 +22,14 @@ pipeline{
         sh "cat trufflehog"
       }
     }
+         stage ('SAST') {
+      steps {
+        withSonarQubeEnv('sonarqube') {
+          sh 'mvn sonarqube:sonarqube'
+          sh 'cat target/sonarqube/report-task.txt'
+        }
+      }
+    }
     //      stage ('Source Composition Analysis') {
     //   steps {
     //      sh 'rm owasp* || true'
