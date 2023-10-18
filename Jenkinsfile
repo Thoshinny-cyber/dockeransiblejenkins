@@ -35,20 +35,23 @@ pipeline{
       steps {
         // timeout(time: 10, unit: 'MINUTES') {
         // echo 'Testing...'
-        // snykSecurity(
-        //   snykInstallation: 'snyk',
-        //   snykTokenId: env.SNYK_API_TOKEN,
-        //   // place other parameters here
+        snykSecurity(
+          failOnError: false, 
+          failOnIssues: false, 
+          snykInstallation: 'Snyk', 
+          snykTokenId: 'Snyk'
+            )
+          // place other parameters here
         // )
         // }
-          script{
-          // withCredentials([string(credentialsId: 'env.SNYK_API_TOKEN', variable: 'SNYK_API_TOKEN')]) 
-          docker.image('thoshinny/snyk:latest').inside() {
-                        // Run the Snyk scan within the Docker container
-                        sh "snyk test"
-                    }
+          // script{
+          // // withCredentials([string(credentialsId: 'env.SNYK_API_TOKEN', variable: 'SNYK_API_TOKEN')]) 
+          // docker.image('thoshinny/snyk:latest').inside() {
+          //               // Run the Snyk scan within the Docker container
+          //               sh "snyk test"
+          //           }
+          // // }
           // }
-          }
       }
     }        
         stage('Maven Build'){
